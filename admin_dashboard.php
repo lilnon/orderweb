@@ -1,16 +1,15 @@
 <?php
-include './connect/connect.php'; // Adjust path if needed
-
 session_start();
 
 // ตรวจสอบว่าผู้ใช้ล็อกอินอยู่หรือไม่
 if (!isset($_SESSION['username'])) {
-    header("Location: guard/login.php"); // ถ้ายังไม่ล็อกอินให้ไปที่หน้า login
+    header("Location: ./guard/login.php"); // ถ้ายังไม่ล็อกอินให้ไปที่หน้า login
     exit();
 }
 
 // รวมไฟล์ header และ footer
 include './layout/header.php';
+
 ?>
 
 <!DOCTYPE html>

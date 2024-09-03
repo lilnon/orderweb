@@ -1,6 +1,7 @@
 <?php
 include './connect/connect.php'; // Adjust path if needed
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,7 +36,7 @@ include './connect/connect.php'; // Adjust path if needed
 
 <body class="flex">
     <div class="sidebar">
-        <a href="./index.php" class="navbar-bar">Shabu Full</a> <!-- Top bar in sidebar -->
+        <a href="../index.php" class="navbar-bar">Shabu Full</a> <!-- Top bar in sidebar -->
 
         <?php if (isset($_SESSION['username'])): ?>
             <div class="text-center p-2">
@@ -50,9 +51,10 @@ include './connect/connect.php'; // Adjust path if needed
 
                 <?php if ($role === 'admin'): ?>
                     <a href="./admin_dashboard.php" class="btn btn-empty w-full">Dashboard</a>
-                    <a href="./admin_members.php" class="btn btn-empty w-full">Members</a>
+                    <a href="./admin_member.php" class="btn btn-empty w-full">Members</a>
+                    <a href="./admin_add_menu.php" class="btn btn-empty w-full">Add Menu</a>
                 <?php elseif ($role === 'employee'): ?>
-                    <a href="./order.php" class="btn btn-empty w-full">Order</a>
+                    <a href="./employee_order.php" class="btn btn-empty w-full">Order</a>
                 <?php elseif ($role === 'member' || $role === 'user'): ?>
                     <a href="./menu.php" class="btn btn-empty w-full">MENU</a>
 

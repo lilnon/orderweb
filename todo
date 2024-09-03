@@ -6,3 +6,14 @@
     - เปลี่ยนรูป เพิ่มรูป ในหน้า index ได้
     Member
     - ทำให้เห็นส่วนลดราคา เพิ่ม
+
+       github update
+
+        first commit us
+git add .
+git commit -m "commit message here" Enter
+git push origin main
+
+        after first commit
+git commit -am "commit message here" Enter
+git push
