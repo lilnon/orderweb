@@ -57,34 +57,60 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['image']) && isset($_
         <h1 class="text-3xl font-bold mb-6">Add Menu Item</h1>
         
         <?php if (isset($message)): ?>
-            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
                 <span class="block sm:inline"><?php echo htmlspecialchars($message); ?></span>
             </div>
         <?php endif; ?>
 
         <form action="" method="POST" enctype="multipart/form-data" class="bg-white shadow-md rounded-lg p-6">
             <div class="mb-4">
-                <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Menu Name:</label>
-                <input type="text" id="name" name="name" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-            </div>
+                <table class="table-auto w-full bg-white shadow-md rounded-lg">
+                    <tbody>
+                        <tr class="border-t">
+                            <td class="border px-4 py-2 rounded-tl-lg">
+                                <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Menu Name:</label>
+                            </td>
+                            <td class="border px-4 py-2 rounded-tr-lg">
+                                <input type="text" id="name" name="name" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            </td>
+                        </tr>
 
-            <div class="mb-4">
-                <label for="description" class="block text-gray-700 text-sm font-bold mb-2">Description:</label>
-                <textarea id="description" name="description" rows="4" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
-            </div>
+                        <tr class="border-t">
+                            <td class="border px-4 py-2">
+                                <label for="description" class="block text-gray-700 text-sm font-bold mb-2">Description:</label>
+                            </td>
+                            <td class="border px-4 py-2">
+                                <textarea id="description" name="description" rows="4" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
+                            </td>
+                        </tr>
 
-            <div class="mb-4">
-                <label for="price" class="block text-gray-700 text-sm font-bold mb-2">Price:</label>
-                <input type="text" id="price" name="price" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-            </div>
+                        <tr class="border-t">
+                            <td class="border px-4 py-2">
+                                <label for="price" class="block text-gray-700 text-sm font-bold mb-2">Price:</label>
+                            </td>
+                            <td class="border px-4 py-2">
+                                <input type="text" id="price" name="price" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            </td>
+                        </tr>
 
-            <div class="mb-4">
-                <label for="image" class="block text-gray-700 text-sm font-bold mb-2">Image:</label>
-                <input type="file" id="image" name="image" accept="image/*" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-            </div>
-
-            <div class="flex items-center justify-between">
-                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Add Menu Item</button>
+                        <tr class="border-t">
+                            <td class="border px-4 py-2">
+                                <label for="image" class="block text-gray-700 text-sm font-bold mb-2">Image:</label>
+                            </td>
+                            <td class="border px-4 py-2">
+                                <input type="file" id="image" name="image" accept="image/*" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            </td>
+                        </tr>
+                        <tr class="border-t">
+                            <td class="border px-4 py-2 rounded-bl-lg">
+                                <label for="submit" class="block text-gray-700 text-sm font-bold mb-2"></label>
+                            </td>
+                            <td class="border px-4 py-2 rounded-br-lg">
+                                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full">Add Menu Item</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </form>
     </div>
@@ -94,7 +120,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['image']) && isset($_
 <?php
 $conn->close();
 ?>
+
 <?php
 include './layout/footer.php';
-
 ?>

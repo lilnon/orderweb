@@ -18,13 +18,13 @@ $result = $conn->query($sql);
 
 <div class="container mx-auto mt-4 pl-4 px-4"> <!-- Add left padding here -->
     <h1 class="text-3xl font-bold mb-6">Users</h1>
-    <div class="overflow-x-auto">
-        <table class="table-auto w-full bg-white shadow-md rounded-lg">
+    <div class="bg-white shadow-md rounded-lg p-6 overflow-x-auto">
+        <table class="table-auto w-full bg-white shadow-md rounded-lg p-6">
             <thead>
-                <tr>
-                    <th class="px-4 py-2">ID</th>
+                <tr class="bg-gray-100 border-b">
+                    <th class="px-4 py-2 rounded-tl-lg">ID</th>
                     <th class="px-4 py-2">Username</th>
-                    <th class="px-4 py-2">Role</th>
+                    <th class="px-4 py-2 rounded-tr-lg">Role</th>
                 </tr>
             </thead>
             <tbody>

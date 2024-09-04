@@ -8,6 +8,7 @@ if (!isset($_SESSION['username'])) {
 }
 
 // Include the database connection file
+include './connect/connect.php'; // Make sure this path is correct
 include './layout/header.php';
 include './layout/footer.php';
 
@@ -24,8 +25,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_status'])) {
     $stmt->close();
 }
 
-// Fetch orders from the database
-$sql = "SELECT o.id, m.name, o.quantity, o.status FROM orders o JOIN menu m ON o.menu_id = m.id";
+// Fetch orders from the database, including order details
+$sql = "SELECT o.id, 
+               GROUP_CONCAT(m.name SEPARATOR ', ') AS items, 
+               GROUP_CONCAT(o.quantity SEPARATOR ', ') AS quantities, 
+               o.status 
+        FROM orders o 
+        JOIN menu m ON o.menu_id = m.id 
+        GROUP BY o.id";
 $result = $conn->query($sql);
 ?>
 
@@ -35,8 +42,8 @@ $result = $conn->query($sql);
         <thead>
             <tr>
                 <th class="px-4 py-2">Order ID</th>
-                <th class="px-4 py-2">Menu Item</th>
-                <th class="px-4 py-2">Quantity</th>
+                <th class="px-4 py-2">Items Ordered</th>
+                <th class="px-4 py-2">Quantities</th>
                 <th class="px-4 py-2">Status</th>
                 <th class="px-4 py-2">Action</th>
             </tr>
@@ -46,8 +53,8 @@ $result = $conn->query($sql);
                 <?php while ($row = $result->fetch_assoc()): ?>
                     <tr>
                         <td class="border px-4 py-2"><?php echo htmlspecialchars($row['id']); ?></td>
-                        <td class="border px-4 py-2"><?php echo htmlspecialchars($row['name']); ?></td>
-                        <td class="border px-4 py-2"><?php echo htmlspecialchars($row['quantity']); ?></td>
+                        <td class="border px-4 py-2"><?php echo htmlspecialchars($row['items']); ?></td>
+                        <td class="border px-4 py-2"><?php echo htmlspecialchars($row['quantities']); ?></td>
                         <td class="border px-4 py-2">
                             <span class="px-2 py-1 rounded-full 
                                 <?php echo $row['status'] === 'Finished' ? 'bg-green-500 text-white' : 'bg-yellow-500 text-white'; ?>">
