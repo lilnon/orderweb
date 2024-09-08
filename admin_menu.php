@@ -18,7 +18,6 @@ $result = mysqli_query($conn, $sql);
 
 // Handle messages
 $message = isset($_GET['message']) ? htmlspecialchars($_GET['message']) : '';
-
 ?>
 
 <!DOCTYPE html>
@@ -30,7 +29,7 @@ $message = isset($_GET['message']) ? htmlspecialchars($_GET['message']) : '';
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.0/dist/tailwind.min.css">
 </head>
 <body class="bg-gray-100 font-[Itim]">
-    <div class="container mx-auto p-6">
+<div class="main-content">
         <h1 class="text-2xl font-bold mb-4">Menu Management</h1>
         
         <?php if (!empty($message)): ?>
@@ -39,6 +38,10 @@ $message = isset($_GET['message']) ? htmlspecialchars($_GET['message']) : '';
             </div>
         <?php endif; ?>
         
+        <div class="mb-4">
+            <a href="admin_add_menu.php" class="btn btn-empty text-white py-2 px-4">Add Menu Item</a>
+        </div>
+
         <div class="overflow-x-auto">
             <table class="min-w-full bg-white shadow-md rounded-lg p-6">
                 <thead>

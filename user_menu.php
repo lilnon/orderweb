@@ -69,7 +69,7 @@ $result = $conn->query($sql);
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.0/dist/tailwind.min.css">
 </head>
 <body class="bg-gray-100 font-[Itim]">
-    <div class="container mx-auto mt-10 pl-4 px-4">
+    <div class="main-content">
         <h1 class="text-3xl font-bold mb-6">Menu</h1>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             <?php if ($result->num_rows > 0): ?>

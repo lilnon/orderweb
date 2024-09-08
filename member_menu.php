@@ -58,13 +58,12 @@ $sql = "SELECT id, name, description, image_url, price FROM menu";
 $result = $conn->query($sql);
 ?>
 
-<div class="container mx-auto mt-10 pl-4 px-4">
+<div class="main-content">
     <h1 class="text-3xl font-bold mb-6">Menu</h1>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <?php if ($result->num_rows > 0): ?>
             <?php while($row = $result->fetch_assoc()): ?>
                 <?php
-                // Apply a 5% discount to the original price
                 $discounted_price = $row['price'] * 0.95;
                 ?>
                 <div class="bg-white shadow-md rounded-lg overflow-hidden">
@@ -93,28 +92,34 @@ $result = $conn->query($sql);
         <button id="placeOrderBtn" class="bg-green-500 text-white px-4 py-2 rounded-md">Place Order</button>
     </div>
 
-    <!-- Order Summary Popup -->
     <div id="orderSummaryPopup" class="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center hidden">
-        <div class="bg-white p-8 rounded-lg shadow-lg w-3/4 max-w-lg">
-            <h2 class="text-2xl font-bold mb-4">Order Summary</h2>
-            <ul id="orderSummaryList" class="mb-4">
-                <?php if (!empty($_SESSION['order'])): ?>
-                    <?php foreach ($_SESSION['order'] as $item): ?>
-                        <li class="mb-2">
-                            <?php echo htmlspecialchars($item['name']); ?> - Quantity: <?php echo htmlspecialchars($item['quantity']); ?> - <?php echo number_format($item['price'] * $item['quantity'], 2); ?> บาท
-                        </li>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <li>No items in the order.</li>
-                <?php endif; ?>
-            </ul>
-            <form action="" method="POST">
-                <button type="submit" name="place_order" class="bg-blue-500 text-white px-4 py-2 rounded-md">Confirm Order</button>
-                <button type="button" id="cancelOrderBtn" class="ml-4 bg-gray-500 text-white px-4 py-2 rounded-md">Cancel</button>
-            </form>
-        </div>
+    <div class="bg-white p-8 rounded-lg shadow-lg w-3/4 max-w-lg">
+        <h2 class="text-2xl font-bold mb-4">Order Summary</h2>
+        <ul id="orderSummaryList" class="mb-4">
+            <?php if (!empty($_SESSION['order'])): ?>
+                <?php
+                $total = 0;
+                foreach ($_SESSION['order'] as $item):
+                    $item_total = $item['price'] * $item['quantity'];
+                    $total += $item_total;
+                ?>
+                    <li class="mb-2">
+                        <?php echo htmlspecialchars($item['name']); ?> - Quantity: <?php echo htmlspecialchars($item['quantity']); ?> - <?php echo number_format($item_total, 2); ?> บาท
+                    </li>
+                <?php endforeach; ?>
+                <li class="font-bold mt-4">Total: <?php echo number_format($total, 2); ?> บาท</li>
+            <?php else: ?>
+                <li>No items in the order.</li>
+            <?php endif; ?>
+        </ul>
+        <form action="" method="POST">
+            <button type="submit" name="place_order" class="bg-blue-500 text-white px-4 py-2 rounded-md">Confirm Order</button>
+            <button type="button" id="cancelOrderBtn" class="ml-4 bg-gray-500 text-white px-4 py-2 rounded-md">Cancel</button>
+        </form>
     </div>
 </div>
+
+
 
 <?php if (isset($order_message)): ?>
     <div id="orderMessage" class="fixed bottom-4 right-4 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded" role="alert">

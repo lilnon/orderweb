@@ -8,8 +8,7 @@ if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'admin') {
 }
 
 // Include the database connection file
-include './layout/header.php';
-
+include './connect/connect.php'; // Ensure the path to your connection file is correct
 
 // Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['image']) && isset($_POST['name']) && isset($_POST['description']) && isset($_POST['price'])) {
@@ -33,7 +32,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['image']) && isset($_
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('ssss', $name, $description, $image_path, $price);
         if ($stmt->execute()) {
-            $message = "Menu item added successfully!";
+            // Redirect to admin_menu.php with a success message
+            header("Location: admin_menu.php?message=Menu item added successfully!");
+            exit();
         } else {
             $message = "Failed to add menu item: " . $stmt->error;
         }
@@ -42,6 +43,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['image']) && isset($_
         $message = "Failed to upload image.";
     }
 }
+
+include './layout/header.php'; // Include the header after processing
+
 ?>
 
 <!DOCTYPE html>
@@ -53,7 +57,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['image']) && isset($_
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body class="flex">
-    <div class="container mx-auto mt-10 pl-4 px-4">
+    
+<div class="main-content">
         <h1 class="text-3xl font-bold mb-6">Add Menu Item</h1>
         
         <?php if (isset($message)): ?>
@@ -119,8 +124,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['image']) && isset($_
 
 <?php
 $conn->close();
-?>
-
-<?php
-include './layout/footer.php';
+include './layout/footer.php'; // Include the footer
 ?>

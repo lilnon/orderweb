@@ -16,7 +16,7 @@ $sql = "SELECT id, username, role FROM users";
 $result = $conn->query($sql);
 ?>
 
-<div class="container mx-auto mt-4 pl-4 px-4"> <!-- Add left padding here -->
+<div class="main-content">
     <h1 class="text-3xl font-bold mb-6">Users</h1>
     <div class="bg-white shadow-md rounded-lg p-6 overflow-x-auto">
         <table class="table-auto w-full bg-white shadow-md rounded-lg p-6">

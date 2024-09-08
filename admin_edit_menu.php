@@ -41,6 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = $_POST['name'];
     $description = $_POST['description'];
     $price = $_POST['price'];
+    $image_url = $image_url; // Use existing image URL by default
 
     // Handle image upload
     if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
@@ -66,7 +67,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->bind_param('ssssi', $name, $description, $image_url, $price, $id);
 
     if ($stmt->execute()) {
-        $message = "Menu item updated successfully!";
+        // Redirect to admin_menu.php with a success message
+        header("Location: admin_menu.php?message=Menu item updated successfully!");
+        exit();
     } else {
         $message = "Failed to update menu item: " . $stmt->error;
     }
@@ -87,7 +90,7 @@ include './layout/header.php';
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body class="flex">
-    <div class="container mx-auto mt-10 pl-4 px-4">
+<div class="main-content">
         <h1 class="text-3xl font-bold mb-6">Edit Menu Item</h1>
         
         <?php if (!empty($message)): ?>
@@ -153,3 +156,7 @@ include './layout/header.php';
     </div>
 </body>
 </html>
+
+<?php
+include './layout/footer.php';
+?>

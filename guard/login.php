@@ -19,7 +19,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 // Successful login
                 $_SESSION['username'] = $username;
                 $_SESSION['role'] = $user['role']; // Store the user role in session
-                header("Location: ../index.php"); // Update the path as needed
+
+                // Redirect based on role
+                switch ($user['role']) {
+                    case 'admin':
+                        header("Location: ../admin_dashboard.php");
+                        break;
+                    case 'employee':
+                        header("Location: ../employee_order.php");
+                        break;
+                    case 'user':
+                        header("Location: ../user_menu.php");
+                        break;
+                    case 'member':
+                        header("Location: ../member_menu.php");
+                        break;
+                    default:
+                        echo "Unknown role.";
+                }
                 exit();
             } else {
                 echo "Invalid username or password.";
@@ -36,6 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 $conn->close();
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

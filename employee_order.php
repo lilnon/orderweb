@@ -36,7 +36,7 @@ $sql = "SELECT o.id,
 $result = $conn->query($sql);
 ?>
 
-<div class="container mx-auto mt-10 pl-4 px-4">
+<div class="main-content">
     <h1 class="text-3xl font-bold mb-6">Order Status</h1>
     <table class="table-auto w-full bg-white shadow-md rounded-lg overflow-hidden">
         <thead>
